@@ -44,7 +44,8 @@ function cardsPanel(data) {
 	imgCont.classList.add('img-container');
 	
 	// Add Content
-	headLine.textContent = data.articles;
+	const javascript = data.articles.javascript;
+	headLine.textContent = data.articles.;
 	authImg.src = data.articles;
 	authSpan.textContent = data.articles;
 	
@@ -55,7 +56,7 @@ axios
 	.get('https://lambda-times-backend.herokuapp.com/articles')
 	.then(response => {
 		console.log(response);
-	response.data.topics.forEach(item => {
+		response.data.articles.forEach(item => {
 			const topics = tabComponent(item);
 			topicsEntry.appendChild(topics);
 		});
