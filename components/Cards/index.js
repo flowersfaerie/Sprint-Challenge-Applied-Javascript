@@ -22,12 +22,43 @@ const cardsEntry = document.querySelector('.cards-container');
 
 function cardsPanel(data) {
 	
+	//Create the Elements
+	const cards = document.createElement('div');
+	const headLine = document.createElement('div');
+	const auth = document.createElement('div');
+	const imgCont = document.createElement('div');
+	const authImg = document.createElement('img');
+	const authSpan = document.createElement('span');
+	
+	// Append the Elements
+	cards.appendChild(headLine);
+	cards.appendChild(auth);
+	auth.appendChild(imgCont);
+	imgCont.appendChild(authImg);
+	auth.appendChild(authSpan);
+	
+	// Set Class List
+	cards.classList.add('card');
+	headLine.classList.add('headline');
+	auth.classList.add('author');
+	imgCont.classList.add('img-container');
+	
+	// Add Content
+	headLine.textContent = data.articles;
+	authImg.src = data.articles;
+	authSpan.textContent = data.articles;
+	
+	return cards // Returns the Cards component
 }
 
 axios
 	.get('https://lambda-times-backend.herokuapp.com/articles')
 	.then(response => {
 		console.log(response);
+	response.data.topics.forEach(item => {
+			const topics = tabComponent(item);
+			topicsEntry.appendChild(topics);
+		});
 	})
 	.catch(error => {
 		console.log(error);
