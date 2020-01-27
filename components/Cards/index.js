@@ -20,18 +20,33 @@
 
 const cardsEntry = document.querySelector('.cards-container');
 
+axios
+	.get('https://lambda-times-backend.herokuapp.com/articles')
+	.then(response => {
+//		console.log('response', response.data.articles)
+		const artMap = response.data.articles
+		console.log('artMap', artMap)
+		artMap.forEach(item => {
+			const art = cardsPanel(item)
+			cardsEntry.appendChild(art)
+		});
+	})
+	.catch(error => {
+		console.log('error', error)
+	})
+
 function cardsPanel(data) {
 	
 	//Create the Elements
 	const cards = document.createElement('div');
-	const headLine = document.createElement('div');
+	const hdLine = document.createElement('div');
 	const auth = document.createElement('div');
 	const imgCont = document.createElement('div');
 	const authImg = document.createElement('img');
 	const authSpan = document.createElement('span');
 	
 	// Append the Elements
-	cards.appendChild(headLine);
+	cards.appendChild(hdLine);
 	cards.appendChild(auth);
 	auth.appendChild(imgCont);
 	imgCont.appendChild(authImg);
@@ -39,28 +54,23 @@ function cardsPanel(data) {
 	
 	// Set Class List
 	cards.classList.add('card');
-	headLine.classList.add('headline');
+	hdLine.classList.add('headline');
 	auth.classList.add('author');
 	imgCont.classList.add('img-container');
 	
 	// Add Content
-	const javascript = data.articles.javascript;
-	headLine.textContent = data.articles.;
-	authImg.src = data.articles;
-	authSpan.textContent = data.articles;
+//	const jsHeadline = data.articles[][].headline;
+	hdLine.textContent = function head(data) {
+		let keys = data.articles;
+		console.log('keys', keys);
+//		for (i = 0, i < keys.length, i++){
+//			keys[i].headline;
+//		}
+	}
+	console.log('hdLine', hdLine);
+	authImg.src = authorPhoto;
+	authSpan.textContent = authorName;
 	
 	return cards // Returns the Cards component
 }
 
-axios
-	.get('https://lambda-times-backend.herokuapp.com/articles')
-	.then(response => {
-		console.log(response);
-		response.data.articles.forEach(item => {
-			const topics = tabComponent(item);
-			topicsEntry.appendChild(topics);
-		});
-	})
-	.catch(error => {
-		console.log(error);
-	})
